@@ -4,10 +4,11 @@
 
 #Problem explantion:
 '''
-The first line of the input is number of columns for a matrix.
+The first line is indicate the number of cases.
+The second line of the input is number of rows for a matrix.
 followed by matrix aand,the items of the matrix contain either 0 or 1
 example input:
-5
+3
 1 1 0 0 1
 0 0 1 1 0
 0 0 0 0 0
@@ -48,39 +49,46 @@ In the above matrix, L = 2, N = 1 and U = 1 ( I think)
 2. We need a way to iterate over all the possible submatrices of 3 rows and 3 column,
     first i will try to put all the input of the matrix into a single string,
     e.g. example X on line 32 will become: '11101001010011111101'
-    then, loop over the range using while loop,
-    
+    then, loop over the range using while loop.
 
+3. the first submatrix from X (line 33) has an L, if I had to locate it in the now string format from line 51
+    it would be: "[111]01[001]01[001]...." The index of the submatrix's on the X goes like: 0,1,2,  5,6,7,  10,11,12
+    I see a pattern here, if i loop over X, for every iteration, I will create a nested loop that runs three times
+    like: for temp in range(3): X[i+temp*columns:i+temp*columns+3], let's say i = 0, the three
+    iterations will be: X[0:3], X[5:8], X[10:13] which gives the indices needed for the first submatrix (line 55)
+    let's go over one more submatrix, the last one in X, which has N in it and its X indices are: 7,8,9,  12,13,14  17,18,19
+    in the loop: for temp in range(3): X[i+temp*columns:i+temp*columns+3], if i = 7
+    the iterations will be: X[7:10], X[12:15], X[17:20], which is what we need for the last matrix.
+    
+4. just run "if submatrix in L:" same for N and U with suitable counters and the rest is straightforward.
+    
+    
+Note: I am reading the inputs from an external file '06.txt' which has 6 test cases and i am applying algorithm on them
+Note 2: I created two functions for the same algorithm, method_1 and method_2
+        , one where the hardcoded values of L,M and U are sets of binary strings, one where
+        hardcoded values are numbers corresponding to its binary strings. the plan was to test the performance of both.
 '''
 
 
 
 
-columns = int(input("number of columns:"))
-x = ''
-while True:
-    try:
-        line = input("")
-        x+= line
-        assert line!= ''
-    except:
-        break
 
 
 
 
-def method_1():
+
+def method_1(x,columns):
     '''
-    L,M and U will be set of numbers
+    x is the matrix in string format, columns is the number of columns in it
+    Here L,N and U will be set of numbers
     '''
-    global x
-    global columns
-    x = x.replace(' ','')
-    x = x.replace('\n','')
+    
+    
+   
 
 
     res = ''
-    temp =0
+   
     row_count = 1
 
 
@@ -99,12 +107,9 @@ def method_1():
         
        
         #following 6 lines are for creating the submatrix, but in string format
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp+=1
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp+=1
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp=0
+        for temp in range(3):
+            res+= x[i+temp*columns:i+temp*columns+3]
+      
 
         
         
@@ -130,18 +135,15 @@ def method_1():
     print("count of N: ",count_N)
     print("count of U: ",count_U) 
 
-def method_2():
+def method_2(x,columns):
     '''
-    L,N and U will be set of binary strings
+    x is the matrix in string format, columns is the number of columns in it
+    Here L,N and U will be set of binary strings
     '''
-    global x
-    global columns
-    x = x.replace(' ','')
-    x = x.replace('\n','')
+   
 
 
     res = ''
-    temp =0
     row_count = 1
 
 
@@ -159,13 +161,10 @@ def method_2():
             
         
        
-        #following 6 lines are for creating the submatrix, but in string format
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp+=1
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp+=1
-        res+= x[i+temp*columns:i+temp*columns+3]
-        temp=0
+        #The loop for creating a submatrix from the string X
+        for temp in range(3):
+            res+= x[i+temp*columns:i+temp*columns+3]
+        
 
         
         
@@ -193,12 +192,45 @@ def method_2():
 
 
 
-print("Method 1, where L, N , U are set of numbers: ")
-method_1()
-print("Method 2, where L, N, U are set of binary strings")
-method_2()
 
 
+with open("06.txt", "r") as file_object:
+        line_lists = file_object.readlines()
+        for i in range(len(line_lists)):
+            line_lists[i] = line_lists[i].replace(" ","")
+            line_lists[i] = line_lists[i].replace("\n","")
+            
+
+
+test_cases = line_lists[0]
+j = 0
+line_index = 0
+print(test_cases)
+while j<int(test_cases):
+    
+    if line_index>=len(line_lists):
+            break
+    
+    rows = int(line_lists[line_index+1])
+    print(rows)
+
+    columns = len(line_lists[line_index+2])
+    
+    x = ''
+    line_index+=1
+    for i in range(rows):
+        line_index+=1
+        if line_index>=len(line_lists):
+            break
+        print(line_lists[line_index])
+        x+= line_lists[line_index]
+
+    
+    
+    j+=1
+    method_1(x,columns)
+    method_2(x,columns)
+    
 
 
 
