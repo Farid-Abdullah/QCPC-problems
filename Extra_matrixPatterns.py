@@ -228,8 +228,8 @@ while j<int(test_cases):
     
     
     j+=1
-    method_1(x,columns)
-    method_2(x,columns)
+    #method_1(x,columns)
+    method_2(x,columns) 
     
 
 
