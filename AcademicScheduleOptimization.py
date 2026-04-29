@@ -26,13 +26,6 @@ sorted by endtimes:
 '''
 # hardcoding test case for simplicity
 
-def filter_and_sort(test_case):
-    all_lines = test_case.split("\n")
-    new_list = [tuple(map(int,line.split(" "))) for line in all_lines]
-    print(new_list)
-    return sorted(new_list, key = lambda x: x[1])
-    
-    
 test_case2 = '''1 3 2
 5 8 3
 7 12 2
@@ -44,10 +37,18 @@ test_case_extra = '''5 7 1
 8 12 1
 14 19 2
 20 23 1'''
-all_lectures = filter_and_sort(test_case_extra)
+
+def raw_to_tuples(test_case):
+    ''' takes the raw input, puts each lecture as tuple of start,end,focusLevel items. then returns the list of tuples'''
+    all_lines = test_case.split("\n")
+    new_list = [tuple(map(int,line.split(" "))) for line in all_lines]
+    print(new_list)
+    return new_list
+    
+all_lectures = raw_to_tuples(test_case2)
 def getAllcomb_attempt1():
     '''Brute force to find all possible combinations, flawed attempt, couldn't find all combinations'''
-    all_lectures = filter_and_sort(test_case2)
+    all_lectures = raw_to_tuples(test_case2)
     all_combinations = {}
     combinations_count = 1
     for lec in all_lectures:
