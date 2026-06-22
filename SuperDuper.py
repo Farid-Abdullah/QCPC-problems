@@ -19,7 +19,7 @@ kokokokokoko
 
 '''
 n = 4 # hardcodig input for simplicity
-strings_list = ['xyzfoobarfooxyzabckoko','abcxycfoobarfooxyzkoko','foobarfooxyzabcabckoko','kokokokokoko']
+strings_list = ['xyzfoobarfooxyzabckoko','abcxyzfoobarfooxyzkoko','foobarfooxyzabcabckoko','kokokokokoko']
 print(strings_list)
 
 q = int(input())
