@@ -2,7 +2,7 @@
 
 # problem find the number of islands:
 '''
-given a 2x2 matrix, all horizontally and vertically connected 1s are part of an
+given a nxm matrix, all horizontally and vertically connected 1s are part of an
 island, and 0s represent water. count number of islands.
 
 e.g.
