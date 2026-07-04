@@ -39,39 +39,16 @@ There are a few patterns that i get when i XOR beautiful numbers.
 '''
 
 
-
-x = int("101",2)^int("10001",2)^int("100001",2)^int("10000001",2)^int("10000000001",2) # 1205 required XORing 5 beautiful numbers
-
-x = 15
-# I will keep subtracting biggest possible multiple of 2, until i reach 1 in case of odd x, 0 in case of even x,
-# but now i have 1205 as my x, which should reach 1 after i subtract multiples of 2 five times.
-# 1
-temp = x.bit_length()-1 # count number of bits for 1205, will be 11 and subtract 1
-sub = int("1"+"0"*temp,2) # the number that i am going to subtract from 1205
-x = x-sub 
-print(x)
-
-# 2
-temp = x.bit_length()-1
-sub = int("1"+"0"*temp,2)
-x = x-sub
-print(x)
-
-# 3
-temp = x.bit_length()-1
-sub = int("1"+"0"*temp,2)
-x = x-sub
-print(x)
-
-# 4
-temp = x.bit_length()-1
-sub = int("1"+"0"*temp,2)
-x = x-sub
-print(x)
-
-# 5
-temp = x.bit_length()-1
-sub = int("1"+"0"*temp,2)
-x = x-sub
-print(x)
-
+t = int(input()) # no of test cases
+for _ in range(t):
+    x = int(input())
+    count = 0
+    while x >1:
+        temp = x.bit_length()-1
+        sub = int("1"+"0"*temp,2)
+        x = x-sub
+        count+=1
+    if x==1 and count%2==0 or x==0 and count%2==1:
+        print(-1)
+    else:
+        print(count)
