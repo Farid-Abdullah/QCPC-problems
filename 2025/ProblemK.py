@@ -1,16 +1,17 @@
 '''
-
+Problem explanation in my own words: (redundant)
 The story is of a greedy contestant in a programming competetion
-
 the greedy contestant solves n number of problems and then sells all of them.
 
 The problem can be sold at two price points: the Ai or Bi where Ai is the fair price for i'th problem and Bi
 is the highest allowed price for the i'th problem.
 
-if the greedy contestant sells the i'th problem, he gets a strike on his reputation. in total he can afford max_penalty number
+if the greedy contestant sells the i'th problem for Bi price, he gets a strike on his reputation. in total he can afford max_penalty number
 of strikes. if he goes over, he gets banned from selling ever again.
 
 Now the greedy contestant has to strategize his strikes, in a way where the end profit is highest possible without getting banned
+
+(extra note: the greedy contestant can choose to sell the i'th problem for more than Bi, but that will be declined and counted as zero)
 
 input:
 first line is number of test cases
