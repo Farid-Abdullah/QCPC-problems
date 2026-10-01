@@ -1,59 +1,46 @@
 
+# Although I tried to optimize the solution,
+# This is still a brute force solution. Not efficient at all and will certainly get TLE due to O(Q *K^3)
+# where Q is number of queries and K is the average size of the subarray for each query (worse case k = n = 100000)
+# 
 
-
-def findMin(m, start, last):
-    pass
+def findMin(m, arr,start, last):
+    first = False
+    second = False
+    i = 0
+  
+    while i<len(arr) and not( first and second):
+        if not first and start<=i<last and m == arr[i]:
+            first = True
+        elif not second and (i<start or i>=last) and m==arr[i]:
+            second = True
+        i+=1
+    return first and second
     
-tests = int(input(""))
-for test in range(tests):
-    array = input("").split(" ")
-    array = [int(x) for x in array]
+def method2():
+    ''' Uses findMin function and doesn't require an additional subarray'''
+    # hardcoding test cases for simplicity:
+    n = 8
+    #array = input("").split(" ")
+    #array = [int(x) for x in array]
+    array = [5,2,3,2,2,3,2,5]
 
-    q = int(input())
+    q = 5
 
     for query in range(q):
         lr = input().split(" ")
         l,r = int(lr[0])-1,int(lr[1])
         array_lr = array[l:r]
         theMin = min(array_lr)
-        sub_arrays = []
+        
         count = 0
         for i in range(len(array_lr)):
             for j in range(i+1, len(array_lr)+1):
-                first = array_lr[i:j]
-                second = array_lr[0:i] +array_lr[j:len(array_lr)]
-                print(first, second)
-                if first == [] or second == []:
-                    continue
-                if min(first) == min(second):
+                if findMin(theMin,array_lr,i,j):
                     count+=1
         print(count)
 
-def method2():
-    ''' Uses findMin function and doesn't require an additional subarray'''
-    tests = int(input(""))
-    for test in range(tests):
-        array = input("").split(" ")
-        array = [int(x) for x in array]
-
-        q = int(input())
-
-        for query in range(q):
-            lr = input().split(" ")
-            l,r = int(lr[0])-1,int(lr[1])
-            array_lr = array[l:r]
-            theMin = min(array_lr)
-            
-            count = 0
-            for i in range(len(array_lr)):
-                for j in range(i+1, len(array_lr)+1):
-                    print(first, second)
-                    if first == [] or second == []:
-                        continue
-                    if findMin( == min(second):
-                        count+=1
-            print(count)
-            
+method2()
              
                     
                 
