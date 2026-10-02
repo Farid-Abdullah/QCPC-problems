@@ -3,22 +3,27 @@
 # This one uses two pointer approach with compleity O(n2) in worst case (because num of queries == n == 10^5)
 n = int(input()) # input size of array
 arr = list(map(int, input().split()))
-
+#smartCache = {"farthestMinPair": }
 q = int(input())
 for _ in range(q):
     l, r = map(int, input().split())
     l -=1
     r -=1
     p1,p2 = l,r
-    candMin = float('inf')
+    
     foundBoundary = False
-    theMin = min(arr[p1:p2+1])
-    sol = 0
+
+    theMin = float("inf")
+    for i in range(l,r+1):
+        if theMin > arr[i]:
+            theMin = arr[i]
+            p1 = i
+
+    sol = 0 
+
     while p1 < p2: # two pointer approach
         #find first and last occurence of minimum in the range.
-        if arr[p1] != theMin:
-            p1 += 1
-        elif arr[p2] != theMin:
+        if arr[p2] != theMin:
             p2 -= 1
         else:
             foundBoundary = True
