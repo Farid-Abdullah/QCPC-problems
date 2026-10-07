@@ -46,13 +46,13 @@ def method1():
             print("NO")
         else:
             print("YES")
-def method2():
+def method2(): # fails for duplicated weights crates
     ''' Here i won't do bubble sort, instead i will check how many times a box has to be swapped to be taken to correct sorted position
         if any box is moved odd number of times, just print("NO") '''
-    tests = int(input(""))
+    tests = int(input())
     for test in range(tests):
         no_crates = int(input()) # number of crates
-        crates = input().split(" ")
+        crates = input().split()
         for i in range(no_crates):
             crates[i] = (int(crates[i]), i)
       
